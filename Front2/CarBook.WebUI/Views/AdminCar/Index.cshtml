@@ -1,9 +1,12 @@
-﻿
+﻿@using CarBook.Dto.CarDtos
+
+@model List<ResultCarWithBrandsDtos>
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
 }
-
 
 <div class="page-content">
     <div class="container-fluid">
@@ -37,9 +40,9 @@
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                        //count++;
+                                        count++;
                                         <tr>
-                                            <th scope="row">count</th>
+                                            <th scope="row">@count</th>
                                             <td>@item.BrandName</td>
                                             <td>@item.Model</td>
                                             <td>@item.Transmission</td>
