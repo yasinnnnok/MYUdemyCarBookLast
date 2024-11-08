@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UdemyCarBook.Dto.BrandDtos
+namespace CarBook.Dto.BrandDtos
 {
     public class CreateBrandDto
     {
