@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UdemyCarBook.Dto.BannerDtos
+namespace CarBook.Dto.BannerDtos
 {
     public class ResultBannerDto
     {

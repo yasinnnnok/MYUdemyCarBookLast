@@ -33,7 +33,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Front2", "Front2", "{C02D23
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarBook.WebUI", "Front2\CarBook.WebUI\CarBook.WebUI.csproj", "{5EE33F89-A621-4BD1-8869-F8229F4DCA53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarBook.Dto", "Front2\CarBook.Dto\CarBook.Dto.csproj", "{483B07CD-22D3-405A-830C-657AE719431E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarBook.Dto", "Front2\CarBook.Dto\CarBook.Dto.csproj", "{483B07CD-22D3-405A-830C-657AE719431E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
