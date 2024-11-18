@@ -15,3 +15,4 @@ namespace CarBook.Dto.BannerDtos
         public string VideoUrl { get; set; }
     }
 }
+
