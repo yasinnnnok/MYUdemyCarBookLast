@@ -1,6 +1,7 @@
 ﻿using CarBook.Dto.LoginDtos;
 using CarBook.WebUI.Models;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
@@ -24,6 +25,8 @@ namespace CarBook.WebUI.Controllers
         {
             return View();
         }
+
+
 
         [HttpPost]
         public async Task<IActionResult> Index(CreateLoginDto createLoginDto)
@@ -60,12 +63,13 @@ namespace CarBook.WebUI.Controllers
                 }
 
             }
-
-
-
-
-
             return View();
+        }
+
+        public IActionResult SignOut()
+        {
+            HttpContext.SignOutAsync(JwtBearerDefaults.AuthenticationScheme);
+            return RedirectToAction("Index","Login");
         }
 
 
