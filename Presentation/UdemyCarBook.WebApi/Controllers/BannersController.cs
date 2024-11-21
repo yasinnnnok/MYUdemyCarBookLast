@@ -6,6 +6,7 @@ using UdemyCarBook.Application.Features.CQRS.Queries.BannerQueries;
 
 namespace UdemyCarBook.WebApi.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class BannersController : ControllerBase

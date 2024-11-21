@@ -4,13 +4,15 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
+using System.Net.Http.Headers;
 using System.Text;
 
 
 namespace CarBook.WebUI.Controllers
 {
+
     [Authorize(Roles = "Admin")]
-    
+
     public class AdminCarController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
@@ -22,14 +24,20 @@ namespace CarBook.WebUI.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7060/api/Cars/GetCarWithBrand");
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultCarWithBrandsDtos>>(jsonData);
-                return View(values);
 
+            var token = User.Claims.FirstOrDefault(x => x.Type == "accessToken")?.Value;
+            if (token != null)
+            {
+                var client = _httpClientFactory.CreateClient();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                var responseMessage = await client.GetAsync("https://localhost:7060/api/Cars/GetCarWithBrand");
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                    var values = JsonConvert.DeserializeObject<List<ResultCarWithBrandsDtos>>(jsonData);
+                    return View(values);
+
+                }
             }
 
             return View();
@@ -93,7 +101,7 @@ namespace CarBook.WebUI.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> UpdateCar (int id)
+        public async Task<IActionResult> UpdateCar(int id)
         {
             var client = _httpClientFactory.CreateClient();
             //MArka dropdown için
@@ -111,7 +119,7 @@ namespace CarBook.WebUI.Controllers
             //formu doldurmak için
             var responseMessage = await client.GetAsync($"https://localhost:7060/api/Cars/{id}");
 
-            if (responseMessage.IsSuccessStatusCode) 
+            if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<UpdateCarDto>(jsonData);
@@ -122,12 +130,12 @@ namespace CarBook.WebUI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateCar (UpdateCarDto updateCarDto)
+        public async Task<IActionResult> UpdateCar(UpdateCarDto updateCarDto)
         {
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(updateCarDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PutAsync("https://localhost:7060/api/Cars",stringContent);
+            var responseMessage = await client.PutAsync("https://localhost:7060/api/Cars", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
