@@ -72,6 +72,11 @@ namespace CarBook.WebUI.Controllers
             return RedirectToAction("Index","Login");
         }
 
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
 
     }
 }
