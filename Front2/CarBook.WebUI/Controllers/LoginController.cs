@@ -57,7 +57,7 @@ namespace CarBook.WebUI.Controllers
                             IsPersistent=true
                         };
                         await HttpContext.SignInAsync(JwtBearerDefaults.AuthenticationScheme,new ClaimsPrincipal(claimsIdentity),authProps);
-                        return RedirectToAction("Index", "AdminCar");
+                        return RedirectToAction("Index", "Home");
                     }
 
                 }

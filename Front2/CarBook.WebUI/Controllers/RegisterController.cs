@@ -7,7 +7,7 @@ using System.Text;
 namespace CarBook.WebUI.Controllers
 {
 
-    [Authorize]
+ 
     public class RegisterController : Controller
     {
 
